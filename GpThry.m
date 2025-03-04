@@ -51,10 +51,16 @@ end function;
 /////////////////////////////////////////////////
 // Given subgroups G1 and G2 of GSp(2g_1,R) and
 // GSp(2g_2, R) (respectively), for some positive 
-// integers g_1, g_2 and some ring R, output the 
-// group G1 x_mult G2, realized as a subgroup of 
+// integers g_1, g_2 and some ring R, output a
+// group that is conjugate to G1 x_mult G2 inside
+// G1 x G2, realized as a subgroup of 
 // GL(2g_1+2g_2, R), together with the natural
-// projection maps to G1 and G2.
+// projection maps to G1 and G2. This function 
+// throws an error if it is unable to uniquely
+// determine G1 x_mult G2 (up to conjugacy). While 
+// this error does not occur in any of the cases 
+// where we call the function, a more general 
+// version should someday be written.
 //////////////////// EXAMPLE ////////////////////
 // > G1 := CSp(4,2);
 // > G2 := GL(2,2);
@@ -97,11 +103,9 @@ ConstructDelta := function(G1,G2)
   pr1 := Pr(GG,Dimension(G1),Dimension(G2),1);
   pr2 := Pr(GG,Dimension(G1),Dimension(G2),2);
   BigSubs := LowIndexSubgroups(GG,NumUnits);
-  for H in BigSubs do
-    if Index(GG,H) eq NumUnits and pr1(H) eq G1 and pr2(H) eq G2 then
-      return H, pr1, pr2;
-    end if;
-  end for;
+  GoodSubs := [H : H in BigSubs | Index(GG,H) eq NumUnits and pr1(H) eq G1 and pr2(H) eq G2];
+  assert #GoodSubs eq 1;
+  return GoodSubs[1], pr1, pr2;
 end function;
 
 /////////////////////////////////////////////////
