@@ -1,6 +1,6 @@
 # ProductPPAVs
 
-This repository is associated with the preprint [An effective open image theorem for products of principally polarized abelian varieties](https://arxiv.org/abs/2212.11472) by Jacob Mayle and Tian Wang.
+This repository is associated with the article *An effective open image theorem for products of principally polarized abelian varieties* [(preprint)](https://arxiv.org/abs/2212.11472) [(journal)](https://www.sciencedirect.com/science/article/abs/pii/S0022314X25000472) by Jacob Mayle and Tian Wang.
 
 The function `FindLambda` in `FindLambda.sage` is a Sage implementation of Algorithm 6.1. It is used for bounding the largest nonsurjective prime associated with the product of two Jacobians of hyperelliptic curves, as described in the statement of Algorithm 6.1. The file `GpThry.m` contains Magma code that is refered to in Section 6 for checking various claims. 
 
